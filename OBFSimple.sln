@@ -1,5 +1,4 @@
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
+
 VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "backend", "backend", "{1AE8ACA6-933B-BF2A-3671-3E2EAC007D16}"
