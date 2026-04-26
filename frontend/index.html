@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UAEU - Outcome Based Framework</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="loginPage" class="login-wrap">
+        <div class="login-card">
+            <div class="login-logo">
+                <div class="login-logo-text">
+                    <div class="login-logo-uaeu">UAEU</div>
+                    <div class="login-logo-dept">Outcome Based Framework</div>
+                </div>
+            </div>
+            <div class="login-sub">KPI Tracking System</div>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="username" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                <div id="loginError" class="alert alert-error" style="display:none; margin-top:16px"></div>
+            </form>
+            
+            <div class="login-help">
+                <div class="help-text">
+                    <strong>Test Credentials:</strong><br>
+                    Admin: admin / admin123<br>
+                    College: ED / TEST@123<br>
+                    CGS: CGS / TEST@123<br>
+                    UOD: UOD / TEST@123<br>
+                    Research: research_office / TEST@123
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App Page -->
+    <div id="appPage" style="display:none">
+        <header class="app-header">
+            <div class="header-brand">
+                UAEU Outcome Based Framework
+                <span class="header-badge">KPI Tracker</span>
+            </div>
+            <div class="header-user">
+                <span id="headerUser"></span>
+                <button class="btn btn-outline-white btn-sm" onclick="logout()">Logout</button>
+            </div>
+        </header>
+
+        <nav class="app-nav" id="appNav"></nav>
+
+        <main class="app-main">
+            <!-- Dashboard Tab -->
+            <div id="tab-dashboard" class="tab-content">
+                <div class="kpi-grid" id="kpiGrid"></div>
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Recent Submissions</h2>
+                    </div>
+                    <div class="card-body table-wrap">
+                        <table class="data-table">
+                            <thead id="dashboardHead"></thead>
+                            <tbody id="dashboardBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Records Tab -->
+            <div id="tab-records" class="tab-content" style="display:none">
+                <div class="toolbar">
+                    <div class="toolbar-title" id="recordsTitle">My Records</div>
+                    <div class="toolbar-right">
+                        <button class="btn btn-primary btn-sm" onclick="openAddModal()">+ New Submission</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body table-wrap">
+                        <table class="data-table">
+                            <thead id="recordsHead"></thead>
+                            <tbody id="recordsBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Consolidated Tab (Admin only) -->
+            <div id="tab-consolidated" class="tab-content" style="display:none">
+                <div class="toolbar">
+                    <div class="toolbar-title">Consolidated Reports</div>
+                    <div class="toolbar-right">
+                        <input type="month" id="consolidatedMonth">
+                    </div>
+                </div>
+                <div id="consolidatedContent"></div>
+            </div>
+
+            <!-- Users Tab (Admin only) -->
+            <div id="tab-users" class="tab-content" style="display:none">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>System Users</h2>
+                    </div>
+                    <div class="card-body table-wrap">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Username</th>
+                                    <th>Full Name</th>
+                                    <th>Role</th>
+                                    <th>Type</th>
+                                    <th>College/Unit</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Edit/Create Modal -->
+    <div id="modal" class="modal-overlay" style="display:none">
+        <div class="modal-box modal-lg">
+            <div class="modal-header">
+                <h2 id="modalTitle">New Submission</h2>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <form id="dataForm">
+                <div class="modal-body">
+                    <div class="month-info">
+                        <span class="month-info-label">Submission Month:</span>
+                        <span class="month-info-value" id="submissionMonthDisplay"></span>
+                        <span class="month-info-note">Auto-captured - Cannot be changed</span>
+                    </div>
+                    <input type="hidden" id="recordId">
+                    <input type="hidden" id="submissionMonth">
+                    <div id="indicatorGroups"></div>
+                    <div id="formError" class="alert alert-error" style="display:none"></div>
+                    <div id="auditInfo" class="audit-info" style="margin-top:12px"></div>
+                </div>
+                <div class="modal-footer">
+                    <div class="audit-info"></div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="modal-overlay" style="display:none">
+        <div class="modal-box modal-sm">
+            <div class="modal-header">
+                <h2>Confirm Delete</h2>
+                <button class="modal-close" onclick="closeDeleteModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete record <strong id="deleteRecordLabel"></strong>?</p>
+                <p style="color:var(--danger); font-size:13px; margin-top:12px">This action cannot be undone.</p>
+            </div>
+            <div class="modal-footer">
+                <div></div>
+                <div class="modal-actions">
+                    <button class="btn btn-secondary" onclick="closeDeleteModal()">Cancel</button>
+                    <button class="btn btn-danger" onclick="confirmDelete()">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>

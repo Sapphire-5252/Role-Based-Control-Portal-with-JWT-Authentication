@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(powershell -Command ':*)",
+      "Bash(powershell -Command \"Remove-Item -Recurse -Force 'CGS','CollegeName','Research Office','UOD','UserType','new\\(_connectionString\\)','throw'\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5284/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5284/swagger/index.html)",
+      "Bash(curl -s http://localhost:5284/)",
+      "Bash(curl -v http://localhost:5284/)",
+      "Bash(powershell -Command \"Get-NetTCPConnection -LocalPort 5284 -ErrorAction SilentlyContinue | Select-Object OwningProcess\")",
+      "Bash(powershell -Command \"Stop-Process -Id 18552 -Force\")",
+      "Bash(powershell -Command \"Test-Path 'C:\\\\Users\\\\artxx\\\\Desktop\\\\OBFSimple\\\\frontend'\")",
+      "Bash(powershell -Command \"Stop-Process -Name dotnet -Force -ErrorAction SilentlyContinue; Start-Sleep 2\")"
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sc query:*)",
+      "Bash(sqlplus -S system/root@localhost:1521/XE)",
+      "Bash(sqlplus system/root@localhost:1521/XE @\"C:\\\\Users\\\\artxx\\\\Desktop\\\\OBFSimple\\\\database\\\\Schema.sql\")",
+      "Bash(dotnet restore:*)",
+      "Bash(dotnet script:*)",
+      "Bash(dotnet fsi:*)",
+      "Bash(dotnet-script)",
+      "Bash(dotnet run:*)",
+      "Bash(rmdir /s /q HashGen)",
+      "Bash(del HashGen.csx)",
+      "Bash(powershell -Command \"Remove-Item -Recurse -Force 'C:\\\\Users\\\\artxx\\\\Desktop\\\\OBFSimple\\\\backend\\\\HashGen'; Remove-Item -Force 'C:\\\\Users\\\\artxx\\\\Desktop\\\\OBFSimple\\\\backend\\\\HashGen.csx'\")",
+      "Bash(dotnet build:*)",
+      "Bash(powershell -Command \"Stop-Process -Name OBFSimple -Force -ErrorAction SilentlyContinue; Start-Sleep 2\")",
+      "Bash(powershell -Command \"Remove-Item 'C:\\\\Users\\\\artxx\\\\Desktop\\\\OBFSimple\\\\backend\\\\Services\\\\DatabaseService.cs'\")",
+      "Bash(powershell -Command \"Remove-Item 'C:\\\\Users\\\\artxx\\\\Desktop\\\\OBFSimple\\\\backend\\\\Models\\\\Models.cs'\")",
+      "Bash(powershell -Command \"Stop-Process -Name dotnet -Force -ErrorAction SilentlyContinue; Start-Sleep 2; Remove-Item -Recurse -Force 'C:\\\\Users\\\\artxx\\\\Desktop\\\\OBFSimple\\\\backend\\\\HashGen' -ErrorAction SilentlyContinue; Remove-Item -Force 'C:\\\\Users\\\\artxx\\\\Desktop\\\\OBFSimple\\\\backend\\\\HashGen.csx' -ErrorAction SilentlyContinue; Write-Host 'done'\")"
+    ]
+  }
+}
